@@ -1,14 +1,14 @@
 package com.example.hw_spring_05.controller;
 
+import com.example.hw_spring_05.aspect.TrackUserAction;
 import com.example.hw_spring_05.model.Task;
 import com.example.hw_spring_05.model.TaskStatus;
 import com.example.hw_spring_05.service.TaskService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/tasks")
@@ -21,6 +21,7 @@ public class Controller {
     }
     //просмотр всех задач
     @GetMapping
+    @TrackUserAction
     public List<Task> getAllTask() {
         return  service.getAllTasks();
     }
@@ -42,6 +43,7 @@ public class Controller {
 
     //удаление задачи
     @DeleteMapping("/{id}")
+    @TrackUserAction
     public void deleteTask(@PathVariable Long id) {
         service.deleteTask(id);
     }
